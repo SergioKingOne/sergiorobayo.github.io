@@ -93,6 +93,16 @@ export default function About() {
                 ))}
               </div>
             </motion.div>
+
+            <motion.div variants={item} className="pt-6">
+              <p className="text-foreground font-mono text-sm mb-3">Certifications:</p>
+              <div className="flex items-center gap-2">
+                <span className="px-3 py-1 text-sm font-mono text-accent border border-accent/50 rounded bg-accent/5">
+                  AWS Certified AI Practitioner
+                </span>
+                <span className="text-muted/60 text-xs font-mono">Early Adopter 2025</span>
+              </div>
+            </motion.div>
           </motion.div>
 
           <motion.div
