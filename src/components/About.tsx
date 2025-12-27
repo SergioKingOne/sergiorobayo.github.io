@@ -54,7 +54,6 @@ export default function About() {
           variants={item}
           className="text-2xl md:text-3xl font-bold text-foreground mb-12 flex items-center gap-4"
         >
-          <span className="text-accent font-mono text-lg">01.</span>
           About Me
           <span className="h-px bg-muted/30 flex-1 max-w-xs" />
         </motion.h2>
@@ -71,13 +70,13 @@ export default function About() {
             <p className="text-muted leading-relaxed">
               Currently leading backend at <span className="text-accent">Surt AI</span>,
               building fraud prevention infrastructure that protects millions of transactions.
-              Previously built AI-powered systems at Vertex Studio — actor-based architectures,
+              Previously built AI-powered systems at Vertex Studio - actor-based architectures,
               RAG pipelines, real-time video analysis.
             </p>
 
             <p className="text-muted leading-relaxed">
               My approach: type safety, clean APIs, infrastructure as code. I build for
-              scale from day one — event-driven, async, observable.
+              scale from day one - event-driven, async, observable.
             </p>
 
             <motion.div variants={item} className="pt-6">
@@ -112,7 +111,7 @@ export default function About() {
             <div className="relative w-64 h-64 md:w-full md:h-80">
               <Image
                 src="/sergio.jpeg"
-                alt="Sergio Robayo"
+                alt="Sergio"
                 fill
                 sizes="(max-width: 768px) 256px, 300px"
                 className="rounded object-cover grayscale hover:grayscale-0 transition-all duration-300"

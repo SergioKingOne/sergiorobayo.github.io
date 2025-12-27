@@ -31,7 +31,7 @@ export default function Contact() {
         animate={isInView ? "show" : "hidden"}
       >
         <motion.p variants={item} className="text-accent font-mono text-sm mb-4">
-          05. What&apos;s Next?
+          What&apos;s Next?
         </motion.p>
 
         <motion.h2

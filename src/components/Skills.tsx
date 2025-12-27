@@ -57,7 +57,6 @@ export default function Skills() {
           variants={item}
           className="text-2xl md:text-3xl font-bold text-foreground mb-12 flex items-center gap-4"
         >
-          <span className="text-accent font-mono text-lg">04.</span>
           Skills
           <span className="h-px bg-muted/30 flex-1 max-w-xs" />
         </motion.h2>

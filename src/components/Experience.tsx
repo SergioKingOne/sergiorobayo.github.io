@@ -20,7 +20,7 @@ const experiences: ExperienceItem[] = [
     company: "Surt AI",
     companyUrl: "https://surt.io",
     location: "United States (Remote)",
-    period: "Oct 2025 — Present",
+    period: "Oct 2025 - Present",
     current: true,
     bullets: [
       "Leading backend team for fraud prevention platform serving B2B clients across 2 product lines",
@@ -37,9 +37,9 @@ const experiences: ExperienceItem[] = [
     company: "Surt AI",
     companyUrl: "https://surt.io",
     location: "United States (Remote)",
-    period: "Jun 2025 — Oct 2025",
+    period: "Jun 2025 - Oct 2025",
     bullets: [
-      "First backend engineer — built fraud prevention infrastructure from scratch, shipped in 4 months",
+      "First backend engineer - built fraud prevention infrastructure from scratch, shipped in 4 months",
       "Architected 11-stage KYC pipeline with biometric verification and graph-based risk engine",
       "Delivered serverless Rust stack: 28 Lambda functions, 34 DynamoDB tables, 26 Terraform modules",
     ],
@@ -54,7 +54,7 @@ const experiences: ExperienceItem[] = [
     company: "Vertex Studio",
     companyUrl: "https://vertexstudio.co",
     location: "El Salvador (Remote)",
-    period: "Nov 2023 — Jun 2025",
+    period: "Nov 2023 - Jun 2025",
     bullets: [
       "Key contributor to Bioma, an actor-based Rust architecture powering AI-driven systems",
       "Built RAG pipeline and real-time video analysis with computer vision for anomaly detection",
@@ -96,7 +96,7 @@ function ExperienceCard({ experience, index }: { experience: ExperienceItem; ind
       <div
         className={`absolute left-0 top-2 w-2 h-2 rounded-full -translate-x-[3px] ${
           experience.current
-            ? "bg-accent shadow-[0_0_8px_rgba(100,255,218,0.5)]"
+            ? "bg-accent shadow-[0_0_8px_rgba(201,169,97,0.5)]"
             : "bg-muted/50"
         }`}
       />
@@ -181,7 +181,6 @@ export default function Experience() {
           variants={item}
           className="text-2xl md:text-3xl font-bold text-foreground mb-12 flex items-center gap-4"
         >
-          <span className="text-accent font-mono text-lg">02.</span>
           Experience
           <span className="h-px bg-muted/30 flex-1 max-w-xs" />
         </motion.h2>

@@ -19,9 +19,16 @@ const item = {
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 md:px-24 lg:px-32">
+    <section className="relative min-h-screen flex items-center justify-center px-6 md:px-24 lg:px-32 overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+      />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-background/85" />
       <motion.div
-        className="max-w-3xl"
+        className="relative z-10 max-w-3xl"
         variants={container}
         initial="hidden"
         animate="show"
@@ -34,7 +41,7 @@ export default function Hero() {
           variants={item}
           className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-2"
         >
-          Sergio Robayo.
+          Sergio.
         </motion.h1>
 
         <motion.h2

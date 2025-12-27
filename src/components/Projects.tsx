@@ -142,7 +142,6 @@ export default function Projects() {
           variants={item}
           className="text-2xl md:text-3xl font-bold text-foreground mb-12 flex items-center gap-4"
         >
-          <span className="text-accent font-mono text-lg">03.</span>
           Projects
           <span className="h-px bg-muted/30 flex-1 max-w-xs" />
         </motion.h2>

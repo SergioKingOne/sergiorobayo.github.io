@@ -40,9 +40,9 @@ export default function Header() {
         {/* Logo */}
         <a
           href="#"
-          className="text-accent font-mono text-lg font-bold hover:opacity-80 transition-opacity"
+          className="text-accent font-script text-3xl hover:opacity-80 transition-opacity"
         >
-          SR
+          Sergio
         </a>
 
         {/* Desktop Nav */}

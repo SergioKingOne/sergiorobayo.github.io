@@ -5,7 +5,7 @@ export default function Footer() {
         Built with Next.js, Tailwind CSS & Framer Motion
       </p>
       <p className="text-muted/50 text-xs font-mono">
-        &copy; {new Date().getFullYear()} Sergio Robayo
+        &copy; {new Date().getFullYear()} Sergio
       </p>
     </footer>
   );
