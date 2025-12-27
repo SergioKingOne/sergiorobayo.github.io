@@ -52,18 +52,33 @@ const experiences: ExperienceItem[] = [
   {
     title: "Software Engineer",
     company: "Vertex Studio",
-    companyUrl: "https://vertexstudio.co",
+    companyUrl: "https://vrx.group/",
     location: "El Salvador (Remote)",
-    period: "Nov 2023 - Jun 2025",
+    period: "Jul 2024 - Jun 2025",
     bullets: [
       "Key contributor to Bioma, an actor-based Rust architecture powering AI-driven systems",
       "Built RAG pipeline and real-time video analysis with computer vision for anomaly detection",
-      "Led MLOps team within 3 months, optimized AI generation pipeline from 50s+ to 3.5s",
+      "Developed unified dashboard integrating SurrealDB, LLM chat, MCP tools, MinIO storage",
     ],
     expandedBullets: [
-      "Developed unified dashboard integrating SurrealDB, LLM chat, MCP tools, MinIO storage",
       "Engineered Blender add-on with WebSocket real-time logging for AI texture generation",
-      "Implemented comprehensive testing (unit, integration, stress) for Bioma crates",
+      "Implemented unit, integration, and stress testing for Bioma crates",
+    ],
+  },
+  {
+    title: "Lead MLOps Engineer",
+    company: "Vertex Studio",
+    companyUrl: "https://vrx.group/",
+    location: "El Salvador (Remote)",
+    period: "Nov 2023 - Jul 2024",
+    bullets: [
+      "Led MLOps team within 3 months of joining, managing backend across 3 Rust codebases",
+      "Optimized AI generation pipeline from 50s+ to 3.5s with ComfyUI prompt engineering",
+      "Built Blender Python automation for tech art team with dynamic camera/lighting systems",
+    ],
+    expandedBullets: [
+      "Leveraged Ansible for local and Docker environments, deployed NVIDIA images for GPU workflows",
+      "Developed AI-based textures and 3D assets from prompts using Stable Diffusion",
     ],
   },
 ];
