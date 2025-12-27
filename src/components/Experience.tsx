@@ -18,7 +18,7 @@ const experiences: ExperienceItem[] = [
   {
     title: "Lead Backend Engineer",
     company: "Surt AI",
-    companyUrl: "https://surt.io",
+    companyUrl: "https://surt.com",
     location: "United States (Remote)",
     period: "Oct 2025 - Present",
     current: true,
@@ -35,7 +35,7 @@ const experiences: ExperienceItem[] = [
   {
     title: "Founding Backend Engineer",
     company: "Surt AI",
-    companyUrl: "https://surt.io",
+    companyUrl: "https://surt.com",
     location: "United States (Remote)",
     period: "Jun 2025 - Oct 2025",
     bullets: [

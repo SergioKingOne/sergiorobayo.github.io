@@ -17,7 +17,7 @@ const projects: Project[] = [
     description:
       "Fraud prevention infrastructure built from scratch. 11-stage KYC pipeline, biometric verification, graph-based risk engine with 230 nodes.",
     tech: ["Rust", "AWS Lambda", "DynamoDB", "Terraform"],
-    github: "https://surt.io",
+    github: "https://surt.com",
     featured: true,
   },
   {
@@ -25,28 +25,28 @@ const projects: Project[] = [
     description:
       "Actor-based Rust architecture powering AI-driven systems. RAG pipeline, real-time streaming, inter-actor communication.",
     tech: ["Rust", "Tokio", "SurrealDB"],
-    github: "https://github.com/SergioKingOne",
+    github: "https://github.com/VertexStudio/bioma",
   },
   {
     title: "Distributed File Processor",
     description:
       "Scalable serverless system processing large files in parallel using AWS Lambda and message queues.",
     tech: ["Go", "AWS Lambda", "S3", "SNS", "SQS"],
-    github: "https://github.com/SergioKingOne",
+    github: "https://github.com/SergioKingOne/distributed-file-processor",
   },
   {
     title: "Cloud-Native Travel Backend",
     description:
       "Secure backend infrastructure with ECS Fargate, RDS PostgreSQL, and Cognito authentication.",
     tech: ["AWS ECS", "RDS", "Cognito", "Terraform"],
-    github: "https://github.com/SergioKingOne",
+    github: "https://github.com/SergioKingOne/wanderlog",
   },
   {
     title: "Rusty Chat Sync",
     description:
       "Real-time chat application with WebAssembly frontend and AWS serverless backend.",
     tech: ["Rust", "WASM", "AppSync", "DynamoDB"],
-    github: "https://github.com/SergioKingOne",
+    github: "https://github.com/SergioKingOne/rusty-chat-sync",
   },
 ];
 

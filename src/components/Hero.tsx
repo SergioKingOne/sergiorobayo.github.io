@@ -48,15 +48,14 @@ export default function Hero() {
           variants={item}
           className="text-2xl md:text-4xl lg:text-5xl font-bold text-muted mb-6"
         >
-          Backend Engineer | Rust | AWS | Fraud Prevention
+          Backend Engineer | Rust | AWS
         </motion.h2>
 
         <motion.p
           variants={item}
           className="text-muted text-base md:text-lg max-w-xl mb-10 leading-relaxed"
         >
-          I build secure, high-performance backend systems in Rust and AWS,
-          specializing in fraud prevention that protects millions of transactions.
+          I build systems from scratch and ship fast. Fraud prevention, identity verification, AI pipelines - whatever the problem demands, I learn it deeply and make it work.
         </motion.p>
 
         <motion.div variants={item} className="flex flex-col sm:flex-row gap-4">
