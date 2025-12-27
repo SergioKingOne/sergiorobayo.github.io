@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { assetPath } from "@/lib/config";
 
 const container = {
   hidden: { opacity: 0 },
@@ -62,7 +63,7 @@ export default function Contact() {
             LinkedIn
           </a>
           <a
-            href="/resume.pdf"
+            href={assetPath("/resume.pdf")}
             download
             className="px-8 py-4 border border-muted text-muted font-mono text-sm rounded hover:border-accent hover:text-accent transition-colors"
           >

@@ -2,6 +2,7 @@
 
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
+import { assetPath } from "@/lib/config";
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -60,7 +61,7 @@ export default function Header() {
             ))}
           </ul>
           <a
-            href="/resume.pdf"
+            href={assetPath("/resume.pdf")}
             className="px-4 py-2 border border-accent text-accent font-mono text-sm rounded hover:bg-accent/10 transition-colors"
           >
             Resume
@@ -119,7 +120,7 @@ export default function Header() {
           ))}
           <li>
             <a
-              href="/resume.pdf"
+              href={assetPath("/resume.pdf")}
               className="px-6 py-3 border border-accent text-accent font-mono text-sm rounded hover:bg-accent/10 transition-colors"
             >
               Resume

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { assetPath } from "@/lib/config";
 
 const container = {
   hidden: { opacity: 0 },
@@ -23,7 +24,7 @@ export default function Hero() {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/hero-bg.jpg')` }}
+        style={{ backgroundImage: `url('${assetPath('/hero-bg.jpg')}')` }}
       />
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-background/85" />
@@ -66,7 +67,7 @@ export default function Hero() {
             View Projects
           </a>
           <a
-            href="/resume.pdf"
+            href={assetPath("/resume.pdf")}
             className="px-6 py-3 border border-muted text-muted font-mono text-sm rounded hover:border-accent hover:text-accent transition-colors text-center"
           >
             Download Resume

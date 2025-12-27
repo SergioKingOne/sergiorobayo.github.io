@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import { assetPath } from "@/lib/config";
 
 const techStack = [
   { name: "Rust", category: "language" },
@@ -109,7 +110,7 @@ export default function About() {
           >
             <div className="relative w-64 h-64 md:w-full md:h-80">
               <Image
-                src="/sergio.jpeg"
+                src={assetPath("/sergio.jpeg")}
                 alt="Sergio"
                 fill
                 sizes="(max-width: 768px) 256px, 300px"
