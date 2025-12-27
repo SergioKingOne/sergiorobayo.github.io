@@ -123,7 +123,7 @@ function ExperienceCard({ experience, index }: { experience: ExperienceItem; ind
         <ul className="space-y-2">
           {experience.bullets.map((bullet, i) => (
             <li key={i} className="text-muted text-sm leading-relaxed flex gap-2">
-              <span className="text-accent mt-1.5 flex-shrink-0">▹</span>
+              <span className="text-accent flex-shrink-0">▹</span>
               <span>{bullet}</span>
             </li>
           ))}
@@ -139,7 +139,7 @@ function ExperienceCard({ experience, index }: { experience: ExperienceItem; ind
                   transition={{ duration: 0.3 }}
                   className="text-muted text-sm leading-relaxed flex gap-2"
                 >
-                  <span className="text-accent mt-1.5 flex-shrink-0">▹</span>
+                  <span className="text-accent flex-shrink-0">▹</span>
                   <span>{bullet}</span>
                 </motion.li>
               ))}
