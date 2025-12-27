@@ -42,3 +42,6 @@ next-env.d.ts
 
 *.local.md
 *local.json
+
+# playwright
+.playwright-mcp/
