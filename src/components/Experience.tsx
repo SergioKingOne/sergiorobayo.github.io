@@ -78,7 +78,7 @@ const experiences: ExperienceItem[] = [
     ],
     expandedBullets: [
       "Leveraged Ansible for local and Docker environments, deployed NVIDIA images for GPU workflows",
-      "Developed AI-based textures and 3D assets from prompts using Stable Diffusion",
+      "Built Rust pipeline for AI texture and 3D asset generation using Stable Diffusion",
     ],
   },
 ];
