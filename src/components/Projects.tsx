@@ -31,7 +31,7 @@ const projects: Project[] = [
     title: "Distributed File Processor",
     description:
       "Scalable serverless system processing large files in parallel using AWS Lambda and message queues.",
-    tech: ["Go", "AWS Lambda", "S3", "SNS", "SQS"],
+    tech: ["Rust", "AWS Lambda", "S3", "SNS", "SQS"],
     github: "https://github.com/SergioKingOne/distributed-file-processor",
   },
   {

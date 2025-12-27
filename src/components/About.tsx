@@ -8,7 +8,6 @@ const techStack = [
   { name: "Rust", category: "language" },
   { name: "Python", category: "language" },
   { name: "TypeScript", category: "language" },
-  { name: "Go", category: "language" },
   { name: "AWS", category: "cloud" },
   { name: "PostgreSQL", category: "database" },
   { name: "DynamoDB", category: "database" },

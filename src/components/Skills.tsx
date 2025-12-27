@@ -6,7 +6,7 @@ import { useRef } from "react";
 const skillGroups = [
   {
     category: "Languages",
-    skills: ["Rust", "Python", "TypeScript", "Go"],
+    skills: ["Rust", "Python", "TypeScript"],
   },
   {
     category: "AWS",
