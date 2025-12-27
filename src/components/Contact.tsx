@@ -42,9 +42,8 @@ export default function Contact() {
         </motion.h2>
 
         <motion.p variants={item} className="text-muted leading-relaxed mb-10">
-          Looking for a backend engineer who ships fast? I&apos;m currently open to new
-          opportunities. Whether you have a question or just want to say hi, I&apos;ll do my
-          best to get back to you.
+          Have an interesting project or want to chat about backend engineering?
+          I&apos;m always happy to connect. Drop me a message and I&apos;ll get back to you.
         </motion.p>
 
         <motion.div variants={item} className="flex flex-col sm:flex-row gap-4 justify-center">
