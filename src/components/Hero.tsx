@@ -68,6 +68,8 @@ export default function Hero() {
           </a>
           <a
             href={assetPath("/resume.pdf")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-6 py-3 border border-muted text-muted font-mono text-sm rounded hover:border-accent hover:text-accent transition-colors text-center"
           >
             Download Resume

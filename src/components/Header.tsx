@@ -62,6 +62,8 @@ export default function Header() {
           </ul>
           <a
             href={assetPath("/resume.pdf")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-4 py-2 border border-accent text-accent font-mono text-sm rounded hover:bg-accent/10 transition-colors"
           >
             Resume
@@ -121,6 +123,8 @@ export default function Header() {
           <li>
             <a
               href={assetPath("/resume.pdf")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-3 border border-accent text-accent font-mono text-sm rounded hover:bg-accent/10 transition-colors"
             >
               Resume

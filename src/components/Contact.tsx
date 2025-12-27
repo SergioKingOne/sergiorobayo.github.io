@@ -64,7 +64,8 @@ export default function Contact() {
           </a>
           <a
             href={assetPath("/resume.pdf")}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-4 border border-muted text-muted font-mono text-sm rounded hover:border-accent hover:text-accent transition-colors"
           >
             Download Resume
