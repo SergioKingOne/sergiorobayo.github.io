@@ -160,35 +160,6 @@ export default function Hero({ t, paletteHint }: Props) {
         </div>
       </div>
 
-      {/* Photo credit — anchored to bottom-right of the content area, under
-          the portrait. Stays out of the CTA column. */}
-      <div
-        className="absolute hidden lg:flex"
-        style={{
-          right: "max(20px, calc(50vw - 600px))",
-          bottom: "24px",
-          alignItems: "center",
-          gap: "12px",
-          zIndex: 2,
-        }}
-      >
-        <span
-          className="eyebrow"
-          style={{ color: "var(--color-text-faint)", letterSpacing: "0.12em" }}
-        >
-          {t.bottomCaption} · {t.subjectLocation} · {t.subjectYear}
-        </span>
-        <span
-          aria-hidden="true"
-          style={{
-            display: "inline-block",
-            width: "5px",
-            height: "5px",
-            borderRadius: "50%",
-            background: "var(--color-signal)",
-          }}
-        />
-      </div>
     </section>
   );
 }
