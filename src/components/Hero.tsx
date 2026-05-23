@@ -160,17 +160,24 @@ export default function Hero({ t, paletteHint }: Props) {
         </div>
       </div>
 
-      {/* Bottom-left static caption — anchors the desktop photo as artifact */}
+      {/* Photo credit — anchored to bottom-right of the content area, under
+          the portrait. Stays out of the CTA column. */}
       <div
         className="absolute hidden lg:flex"
         style={{
-          left: "max(20px, calc(50vw - 600px))",
-          bottom: "48px",
+          right: "max(20px, calc(50vw - 600px))",
+          bottom: "24px",
           alignItems: "center",
-          gap: "16px",
+          gap: "12px",
           zIndex: 2,
         }}
       >
+        <span
+          className="eyebrow"
+          style={{ color: "var(--color-text-faint)", letterSpacing: "0.12em" }}
+        >
+          {t.bottomCaption} · {t.subjectLocation} · {t.subjectYear}
+        </span>
         <span
           aria-hidden="true"
           style={{
@@ -181,18 +188,6 @@ export default function Hero({ t, paletteHint }: Props) {
             background: "var(--color-signal)",
           }}
         />
-        <span
-          className="eyebrow"
-          style={{ color: "var(--color-text-faint)" }}
-        >
-          {t.bottomCaption}
-        </span>
-        <span
-          className="eyebrow"
-          style={{ color: "var(--color-text-faint)" }}
-        >
-          · {t.subjectLocation} · {t.subjectYear}
-        </span>
       </div>
     </section>
   );
