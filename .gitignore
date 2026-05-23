@@ -45,3 +45,11 @@ next-env.d.ts
 
 # playwright
 .playwright-mcp/
+
+# local dev (Claude Code session state)
+/.agents/
+/.claude/
+/skills-lock.json
+
+# debug screenshots at repo root
+/*.png

@@ -1,126 +1,124 @@
-"use client";
+import type { Dict } from "@/lib/i18n/types";
 
-import { motion, useInView } from "framer-motion";
-import Image from "next/image";
-import { useRef } from "react";
-import { assetPath } from "@/lib/config";
+interface Props {
+  t: Dict["about"];
+}
 
-const techStack = [
-  { name: "Rust", category: "language" },
-  { name: "Python", category: "language" },
-  { name: "TypeScript", category: "language" },
-  { name: "AWS", category: "cloud" },
-  { name: "PostgreSQL", category: "database" },
-  { name: "DynamoDB", category: "database" },
-  { name: "Redis", category: "database" },
-  { name: "OpenSearch", category: "database" },
-  { name: "Terraform", category: "devops" },
-  { name: "Docker", category: "devops" },
-  { name: "GitHub Actions", category: "devops" },
-];
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
-};
-
-export default function About() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
+export default function About({ t }: Props) {
   return (
-    <section
-      id="about"
-      className="py-24 px-6 md:px-24 lg:px-32"
-      ref={ref}
-    >
-      <motion.div
-        className="max-w-5xl mx-auto"
-        variants={container}
-        initial="hidden"
-        animate={isInView ? "show" : "hidden"}
-      >
-        <motion.h2
-          variants={item}
-          className="text-2xl md:text-3xl font-bold text-foreground mb-12 flex items-center gap-4"
+    <section id="about" style={{ padding: "clamp(64px, 8vw, 120px) 20px" }}>
+      <div className="max-w-[1240px] mx-auto md:px-8 lg:px-8">
+        <p className="eyebrow" style={{ marginBottom: "24px" }}>
+          {t.eyebrow}
+        </p>
+
+        {/* Editorial pull-quote */}
+        <h2
+          style={{
+            fontSize: "clamp(34px, 5.2vw, 60px)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.025em",
+            color: "var(--color-text-bright)",
+            maxWidth: "22ch",
+            marginBottom: "80px",
+            fontVariationSettings: '"opsz" 72, "SOFT" 30',
+          }}
         >
-          About Me
-          <span className="h-px bg-muted/30 flex-1 max-w-xs" />
-        </motion.h2>
+          {t.pullQuote}
+        </h2>
 
-        <div className="grid md:grid-cols-[1fr_300px] gap-12 items-start">
-          <motion.div variants={item} className="space-y-4">
-            <p className="text-muted leading-relaxed">
-              Backend engineer who builds systems from scratch and ships fast. 2+ years
-              specializing in <span className="text-accent">Rust</span> and serverless
-              architectures, with production experience across fraud prevention, identity
-              verification, AI-powered systems, and real-time pipelines.
-            </p>
-
-            <p className="text-muted leading-relaxed">
-              Currently leading backend at <span className="text-accent">Surt AI</span>,
-              building fraud prevention infrastructure that protects millions of transactions.
-              Previously built AI-powered systems at Vertex Studio - actor-based architectures,
-              RAG pipelines, real-time video analysis.
-            </p>
-
-            <p className="text-muted leading-relaxed">
-              My approach: type safety, clean APIs, infrastructure as code. I build for
-              scale from day one - event-driven, async, observable.
-            </p>
-
-            <motion.div variants={item} className="pt-6">
-              <p className="text-foreground font-mono text-sm mb-4">Technologies I work with:</p>
-              <div className="flex flex-wrap gap-2">
-                {techStack.map((tech) => (
-                  <span
-                    key={tech.name}
-                    className="px-3 py-1 text-sm font-mono text-muted border border-muted/30 rounded hover:border-accent hover:text-accent transition-colors cursor-default"
+        <div className="grid gap-y-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[80px_minmax(0,720px)_minmax(0,1fr)] gap-x-10 gap-y-2 items-baseline">
+            <div className="hidden lg:block" aria-hidden="true" />
+            <div
+              className="lg:col-start-2 lg:col-end-3 min-w-0"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "clamp(15px, 0.92rem + 0.22vw, 17px)",
+                lineHeight: 1.75,
+                color: "var(--color-text)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+              }}
+            >
+              {t.prose.map((p, i) =>
+                i === t.prose.length - 1 ? (
+                  <p
+                    key={i}
+                    style={{
+                      color: "var(--color-text-mute)",
+                      fontSize: "14px",
+                      paddingTop: "12px",
+                      borderTop: "1px solid var(--color-rule-soft)",
+                    }}
                   >
-                    {tech.name}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div variants={item} className="pt-6">
-              <p className="text-foreground font-mono text-sm mb-3">Certifications:</p>
-              <div className="flex items-center gap-2">
-                <span className="px-3 py-1 text-sm font-mono text-accent border border-accent/50 rounded bg-accent/5">
-                  AWS Certified AI Practitioner
-                </span>
-                <span className="text-muted/60 text-xs font-mono">Early Adopter 2025</span>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            variants={item}
-            className="relative group mx-auto md:mx-0"
-          >
-            <div className="relative w-64 h-64 md:w-full md:h-80">
-              <Image
-                src={assetPath("/sergio.jpeg")}
-                alt="Sergio"
-                fill
-                sizes="(max-width: 768px) 256px, 300px"
-                className="rounded object-cover grayscale hover:grayscale-0 transition-all duration-300"
-              />
-              <div className="absolute inset-0 border-2 border-accent rounded translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300" />
+                    {p}
+                  </p>
+                ) : (
+                  <p key={i}>{p}</p>
+                )
+              )}
             </div>
-          </motion.div>
+          </div>
+
+          {/* Numbered marginalia */}
+          <div
+            style={{
+              borderTop: "1px solid var(--color-rule)",
+              paddingTop: "48px",
+              marginTop: "32px",
+            }}
+          >
+            <p className="eyebrow" style={{ marginBottom: "32px" }}>
+              {t.principlesEyebrow}
+            </p>
+            <dl
+              style={{
+                display: "grid",
+                gridTemplateColumns: "minmax(0, 1fr)",
+                gap: "24px",
+                margin: 0,
+              }}
+            >
+              {t.principles.map((p) => (
+                <div
+                  key={p.k}
+                  className="grid grid-cols-[48px_minmax(0,1fr)] md:grid-cols-[80px_minmax(0,1fr)] gap-x-6 items-baseline"
+                  style={{
+                    paddingBottom: "20px",
+                    borderBottom: "1px solid var(--color-rule-soft)",
+                  }}
+                >
+                  <dt
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "11px",
+                      letterSpacing: "0.14em",
+                      color: "var(--color-signal)",
+                    }}
+                  >
+                    {p.k} →
+                  </dt>
+                  <dd
+                    className="min-w-0"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "clamp(14px, 0.86rem + 0.22vw, 15px)",
+                      lineHeight: 1.65,
+                      color: "var(--color-text)",
+                      margin: 0,
+                      maxWidth: "72ch",
+                    }}
+                  >
+                    {p.body}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

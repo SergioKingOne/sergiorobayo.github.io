@@ -1,132 +1,199 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { assetPath } from "@/lib/config";
+import type { Dict, Locale } from "@/lib/i18n/types";
+import OpenPaletteButton from "./OpenPaletteButton";
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
+interface Props {
+  t: Dict["hero"];
+  paletteHint: string;
+  locale: Locale;
+}
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
-};
-
-export default function Hero() {
+export default function Hero({ t, paletteHint }: Props) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 md:px-24 lg:px-32 overflow-hidden">
-      {/* Background Image */}
+    <section
+      className="hero relative overflow-hidden"
+      style={{
+        paddingTop: "max(120px, calc(96px + env(safe-area-inset-top)))",
+        paddingRight: "20px",
+        paddingBottom: "max(64px, calc(48px + env(safe-area-inset-bottom)))",
+        paddingLeft: "20px",
+        minHeight: "100svh",
+      }}
+    >
+      {/* Desktop halftone portrait — silhouette, anchored top-right, prominent. */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('${assetPath('/hero-bg.jpg')}')` }}
+        aria-hidden="true"
+        className="halftone-portrait pointer-events-none absolute hidden lg:block"
+        style={{
+          top: "72px",
+          right: "-2vw",
+          height: "calc(100% - 96px)",
+          aspectRatio: "1100 / 1100",
+          opacity: 0.95,
+          zIndex: 0,
+        }}
       />
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-background/85" />
-      <motion.div
-        className="relative z-10 max-w-3xl"
-        variants={container}
-        initial="hidden"
-        animate="show"
+
+      <div
+        className="max-w-[1240px] mx-auto md:px-8 lg:px-8 relative flex flex-col h-full"
+        style={{ zIndex: 2 }}
       >
-        <motion.p variants={item} className="text-accent font-mono text-sm md:text-base mb-4">
-          Hi, my name is
-        </motion.p>
-
-        <motion.h1
-          variants={item}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-2"
+        {/* ⌘K chip — top right */}
+        <div
+          className="stagger-1 flex justify-end"
+          style={{ marginBottom: "24px" }}
         >
-          Sergio.
-        </motion.h1>
+          <OpenPaletteButton hint={paletteHint} />
+        </div>
 
-        <motion.h2
-          variants={item}
-          className="text-2xl md:text-4xl lg:text-5xl font-bold text-muted mb-6"
+        <p
+          className="stagger-1 eyebrow flex items-center gap-2"
+          style={{ marginBottom: "20px" }}
         >
-          Backend Engineer | Rust | AWS
-        </motion.h2>
+          <span
+            aria-hidden="true"
+            style={{
+              display: "inline-block",
+              width: "6px",
+              height: "6px",
+              borderRadius: "50%",
+              background: "var(--color-signal)",
+              boxShadow:
+                "0 0 0 3px color-mix(in oklab, var(--color-signal) 18%, transparent)",
+            }}
+          />
+          {t.eyebrow}
+        </p>
 
-        <motion.p
-          variants={item}
-          className="text-muted text-base md:text-lg max-w-xl mb-10 leading-relaxed"
+        <h1
+          className="stagger-2"
+          style={{
+            fontSize: "clamp(40px, 8.4vw, 124px)",
+            lineHeight: 0.98,
+            letterSpacing: "-0.035em",
+            marginBottom: "32px",
+            maxWidth: "14ch",
+          }}
         >
-          I build systems from scratch and ship fast. Fraud prevention, identity verification, AI pipelines - whatever the problem demands, I learn it deeply and make it work.
-        </motion.p>
+          {t.titlePart1}
+          <span className="display-italic">{t.titleAccent}</span>
+          {t.titlePart2}
+        </h1>
 
-        <motion.div variants={item} className="flex flex-col sm:flex-row gap-4">
-          <a
-            href="#projects"
-            className="px-6 py-3 border border-accent text-accent font-mono text-sm rounded hover:bg-accent/10 transition-colors text-center"
+        <p
+          className="stagger-3"
+          style={{
+            fontFamily: "var(--font-mono)",
+            color: "var(--color-text-mute)",
+            fontSize: "clamp(15px, 0.92rem + 0.22vw, 17px)",
+            lineHeight: 1.6,
+            maxWidth: "46ch",
+            marginBottom: "40px",
+            minWidth: 0,
+          }}
+        >
+          {t.body.lead}
+          <span style={{ color: "var(--color-text-bright)" }}>{t.body.surt}</span>
+          {t.body.tail}
+        </p>
+
+        {/* Mobile portrait — full-width editorial element between body and CTAs */}
+        <figure
+          className="lg:hidden"
+          style={{ margin: 0, marginBottom: "40px", width: "100%" }}
+        >
+          <figcaption
+            className="eyebrow"
+            style={{
+              marginBottom: "12px",
+              color: "var(--color-text-faint)",
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "12px",
+            }}
           >
-            View Projects
+            <span>{t.portraitLabel}</span>
+            <span>{t.portraitMeta}</span>
+          </figcaption>
+          <div
+            className="halftone-portrait"
+            role="img"
+            aria-label={`${t.subjectName} — portrait`}
+            style={{
+              width: "100%",
+              aspectRatio: "1100 / 1100",
+              opacity: 0.95,
+              border: "1px solid var(--color-rule)",
+              borderRadius: "2px",
+            }}
+          />
+          <figcaption
+            className="eyebrow"
+            style={{
+              marginTop: "12px",
+              color: "var(--color-text-faint)",
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "12px",
+              letterSpacing: "0.12em",
+            }}
+          >
+            <span>{t.subjectName}</span>
+            <span>
+              {t.subjectLocation} · {t.subjectYear}
+            </span>
+          </figcaption>
+        </figure>
+
+        <div className="stagger-4 flex flex-col sm:flex-row gap-3">
+          <a href="#projects" className="cta">
+            {t.viewWork} <span className="arrow">→</span>
           </a>
           <a
             href={assetPath("/resume.pdf")}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 border border-muted text-muted font-mono text-sm rounded hover:border-accent hover:text-accent transition-colors text-center"
+            className="cta-ghost"
           >
-            Download Resume
+            {t.resume} <span className="arrow">↓</span>
           </a>
-        </motion.div>
+        </div>
+      </div>
 
-        {/* Mobile social links */}
-        <motion.div
-          variants={item}
-          className="flex md:hidden gap-6 mt-10 justify-center"
+      {/* Bottom-left static caption — anchors the desktop photo as artifact */}
+      <div
+        className="absolute hidden lg:flex"
+        style={{
+          left: "max(20px, calc(50vw - 600px))",
+          bottom: "48px",
+          alignItems: "center",
+          gap: "16px",
+          zIndex: 2,
+        }}
+      >
+        <span
+          aria-hidden="true"
+          style={{
+            display: "inline-block",
+            width: "5px",
+            height: "5px",
+            borderRadius: "50%",
+            background: "var(--color-signal)",
+          }}
+        />
+        <span
+          className="eyebrow"
+          style={{ color: "var(--color-text-faint)" }}
         >
-          <a
-            href="https://github.com/SergioKingOne"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="text-muted hover:text-accent transition-colors"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-6 h-6"
-            >
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-            </svg>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/sergio-robayo-500584216/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="text-muted hover:text-accent transition-colors"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-6 h-6"
-            >
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-              <rect x="2" y="9" width="4" height="12" />
-              <circle cx="4" cy="4" r="2" />
-            </svg>
-          </a>
-        </motion.div>
-      </motion.div>
+          {t.bottomCaption}
+        </span>
+        <span
+          className="eyebrow"
+          style={{ color: "var(--color-text-faint)" }}
+        >
+          · {t.subjectLocation} · {t.subjectYear}
+        </span>
+      </div>
     </section>
   );
 }

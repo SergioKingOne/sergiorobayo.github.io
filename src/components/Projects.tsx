@@ -1,229 +1,331 @@
-"use client";
-
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { assetPath } from "@/lib/config";
+import type { Dict, ProjectDict } from "@/lib/i18n/types";
 
-interface Project {
-  title: string;
-  description: string;
-  tech: string[];
-  image?: string;
+interface PageProject extends ProjectDict {
+  index: string;
   github?: string;
   liveUrl?: string;
   videoUrl?: string;
-  featured?: boolean;
+  writeupUrl?: string;
+  image?: string;
 }
 
-const projects: Project[] = [
+// Locale-independent project metadata (links + images). Merged with the
+// translated copy from the dictionary at render time.
+const projectAssets: Array<{
+  github?: string;
+  liveUrl?: string;
+  videoUrl?: string;
+  writeupUrl?: string;
+  image?: string;
+}> = [
+  { liveUrl: "https://surt.com", image: "/projects/surt-lead.jpg" },
+  { writeupUrl: "https://www.linkedin.com/in/sergio-robayo-500584216/" },
   {
-    title: "Surt AI Platform",
-    description:
-      "Fraud prevention infrastructure built from scratch. 11-stage KYC pipeline, biometric verification, graph-based risk engine with 230 nodes.",
-    tech: ["Rust", "AWS Lambda", "DynamoDB", "Terraform"],
-    image: "/projects/surt-lead.jpg",
-    liveUrl: "https://surt.com",
-    featured: true,
-  },
-  {
-    title: "Bioma",
-    description:
-      "Actor-based Rust architecture powering AI-driven systems. RAG pipeline, real-time streaming, inter-actor communication.",
-    tech: ["Rust", "Tokio", "SurrealDB"],
-    image: "https://img.youtube.com/vi/wN22ooW-2e4/maxresdefault.jpg",
     github: "https://github.com/VertexStudio/bioma",
     videoUrl: "https://www.youtube.com/watch?v=wN22ooW-2e4",
   },
+  {},
   {
-    title: "Distributed File Processor",
-    description:
-      "Scalable serverless system processing large files in parallel using AWS Lambda and message queues.",
-    tech: ["Rust", "AWS Lambda", "S3", "SNS", "SQS"],
-    image: "/projects/dfp.png",
     github: "https://github.com/SergioKingOne/distributed-file-processor",
+    image: "/projects/dfp.png",
   },
   {
-    title: "Cloud-Native Travel Backend",
-    description:
-      "Secure backend infrastructure with ECS Fargate, RDS PostgreSQL, and Cognito authentication.",
-    tech: ["AWS ECS", "RDS", "Cognito", "Terraform"],
-    image: "/projects/wanderlog.png",
     github: "https://github.com/SergioKingOne/wanderlog",
     videoUrl: "https://www.youtube.com/watch?v=ukE5X6PlFU8",
+    image: "/projects/wanderlog.png",
   },
   {
-    title: "Rusty Chat Sync",
-    description:
-      "Real-time chat application with WebAssembly frontend and AWS serverless backend.",
-    tech: ["Rust", "WASM", "AppSync", "DynamoDB"],
-    image: "/projects/rusty-chat-sync.png",
     github: "https://github.com/SergioKingOne/rusty-chat-sync",
     videoUrl: "https://www.youtube.com/watch?v=Xb2fpzQ-a2c",
+    image: "/projects/rusty-chat-sync.png",
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
+interface Props {
+  t: Dict["projects"];
+}
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
-};
-
-function ProjectCard({ project, className }: { project: Project; className?: string }) {
-  const primaryLink = project.liveUrl || project.github || project.videoUrl;
-  const imageSrc = project.image?.startsWith("http")
-    ? project.image
-    : project.image
-    ? assetPath(project.image)
+function ProjectCard({
+  p,
+  labels,
+}: {
+  p: PageProject;
+  labels: Dict["projects"]["linkLabels"];
+}) {
+  const primaryLink = p.liveUrl || p.writeupUrl || p.github || p.videoUrl;
+  const imageSrc = p.image
+    ? p.image.startsWith("http")
+      ? p.image
+      : assetPath(p.image)
     : null;
 
   return (
-    <motion.div
-      variants={item}
-      className={`group relative flex flex-col bg-background/50 border border-muted/20 rounded-lg hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden ${className}`}
+    <article
+      className="project-card group"
+      style={{
+        border: "1px solid var(--color-rule)",
+        borderRadius: "2px",
+        padding: "32px 28px 28px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+        transition: "border-color 220ms ease, transform 220ms ease",
+        background: "var(--color-ink-2)",
+      }}
     >
-      {/* Project Image */}
+      <div
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: "clamp(36px, 5vw, 42px)",
+          fontWeight: 400,
+          color: "var(--color-text-faint)",
+          lineHeight: 1,
+          letterSpacing: "-0.02em",
+          marginBottom: "4px",
+          transition: "color 220ms ease",
+        }}
+        className="project-numeral"
+      >
+        {p.index}
+      </div>
+
+      <div>
+        <p
+          className="eyebrow"
+          style={{ color: "var(--color-text-mute)", marginBottom: "10px" }}
+        >
+          {p.client}
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            gap: "12px",
+            flexWrap: "wrap",
+          }}
+        >
+          <h3
+            style={{
+              fontSize: "clamp(19px, 1.1rem + 0.5vw, 22px)",
+              lineHeight: 1.22,
+              letterSpacing: "-0.018em",
+              color: "var(--color-text-bright)",
+              fontVariationSettings: '"opsz" 36, "SOFT" 30',
+              flex: "1 1 100%",
+              minWidth: 0,
+            }}
+          >
+            {p.title}
+          </h3>
+          {p.metric && (
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "12px",
+                fontWeight: 500,
+                color: "var(--color-signal)",
+                letterSpacing: "0.04em",
+                whiteSpace: "nowrap",
+                fontVariantNumeric: "tabular-nums",
+              }}
+            >
+              {p.metric}
+            </span>
+          )}
+        </div>
+      </div>
+
       {imageSrc && (
         <a
           href={primaryLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative aspect-video overflow-hidden bg-black/50 flex items-center justify-center"
+          style={{
+            display: "block",
+            border: "1px solid var(--color-rule)",
+            borderRadius: "2px",
+            aspectRatio: "16 / 9",
+            background: "var(--color-ink-1)",
+            overflow: "hidden",
+            position: "relative",
+          }}
+          className="project-image-link"
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imageSrc}
-            alt={project.title}
-            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+            alt={p.title}
+            loading="lazy"
+            decoding="async"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+              filter: "saturate(0.65) brightness(0.9)",
+              transition: "filter 280ms ease, transform 320ms ease",
+            }}
+            className="project-image"
           />
         </a>
       )}
 
-      {/* Content */}
-      <div className="flex flex-col flex-1 p-6">
-        {/* Header with icons */}
-        <div className="flex justify-between items-start mb-3">
-          {!imageSrc && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              className="w-10 h-10 text-accent"
-            >
-              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-            </svg>
-          )}
-          <div className={`flex gap-3 ${imageSrc ? "" : "ml-auto"}`}>
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted hover:text-accent transition-colors"
-                aria-label="GitHub"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                </svg>
-              </a>
-            )}
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted hover:text-accent transition-colors"
-                aria-label="Live Site"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            )}
-            {project.videoUrl && (
-              <a
-                href={project.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted hover:text-accent transition-colors"
-                aria-label="Video"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
-              </a>
-            )}
-          </div>
-        </div>
+      <p
+        className="min-w-0"
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: "clamp(13px, 0.78rem + 0.18vw, 14px)",
+          lineHeight: 1.65,
+          color: "var(--color-text)",
+        }}
+      >
+        {p.description}
+      </p>
 
-        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
-          {project.title}
-        </h3>
-
-        <p className="text-muted text-sm leading-relaxed mb-4 flex-1">{project.description}</p>
-
-        <div className="flex flex-wrap gap-2 mt-auto">
-          {project.tech.map((t) => (
-            <span key={t} className="text-xs font-mono text-muted/70">
-              {t}
-            </span>
-          ))}
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "4px 14px",
+          paddingTop: "4px",
+        }}
+      >
+        {p.tech.map((tag) => (
+          <span
+            key={tag}
+            className="eyebrow"
+            style={{
+              color: "var(--color-text-faint)",
+              letterSpacing: "0.08em",
+            }}
+          >
+            {tag}
+          </span>
+        ))}
       </div>
-    </motion.div>
+
+      <footer
+        style={{
+          marginTop: "auto",
+          paddingTop: "20px",
+          borderTop: "1px solid var(--color-rule-soft)",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "20px",
+        }}
+      >
+        {p.liveUrl && (
+          <a
+            href={p.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="signal-link eyebrow"
+            style={{
+              color: "var(--color-text)",
+              padding: "12px 2px",
+              minHeight: "44px",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            {labels.live}
+          </a>
+        )}
+        {p.writeupUrl && (
+          <a
+            href={p.writeupUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="signal-link eyebrow"
+            style={{
+              color: "var(--color-text)",
+              padding: "12px 2px",
+              minHeight: "44px",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            {labels.writeup}
+          </a>
+        )}
+        {p.github && (
+          <a
+            href={p.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="signal-link eyebrow"
+            style={{
+              color: "var(--color-text)",
+              padding: "12px 2px",
+              minHeight: "44px",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            {labels.github}
+          </a>
+        )}
+        {p.videoUrl && (
+          <a
+            href={p.videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="signal-link eyebrow"
+            style={{
+              color: "var(--color-text)",
+              padding: "12px 2px",
+              minHeight: "44px",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            {labels.video}
+          </a>
+        )}
+      </footer>
+    </article>
   );
 }
 
-export default function Projects() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const featured = projects.find((p) => p.featured);
-  const others = projects.filter((p) => !p.featured);
+export default function Projects({ t }: Props) {
+  const projects: PageProject[] = t.items.map((item, i) => ({
+    ...item,
+    ...projectAssets[i],
+    index: String(i + 1).padStart(2, "0"),
+  }));
 
   return (
-    <section id="projects" className="py-24 px-6 md:px-24 lg:px-32" ref={ref}>
-      <motion.div
-        className="max-w-5xl mx-auto"
-        variants={container}
-        initial="hidden"
-        animate={isInView ? "show" : "hidden"}
-      >
-        <motion.h2
-          variants={item}
-          className="text-2xl md:text-3xl font-bold text-foreground mb-12 flex items-center gap-4"
+    <section id="projects" style={{ padding: "clamp(64px, 8vw, 120px) 20px" }}>
+      <div className="max-w-[1240px] mx-auto md:px-8 lg:px-8">
+        <p className="eyebrow" style={{ marginBottom: "24px" }}>
+          {t.eyebrow}
+        </p>
+        <h2
+          style={{
+            fontSize: "clamp(34px, 5.2vw, 60px)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.025em",
+            marginBottom: "64px",
+            maxWidth: "22ch",
+            color: "var(--color-text-bright)",
+            fontVariationSettings: '"opsz" 72, "SOFT" 30',
+          }}
         >
-          Projects
-          <span className="h-px bg-muted/30 flex-1 max-w-xs" />
-        </motion.h2>
+          {t.title}
+        </h2>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Featured - spans 2 columns on larger screens */}
-          {featured && (
-            <ProjectCard
-              project={featured}
-              className="md:col-span-2 lg:row-span-2"
-            />
-          )}
-
-          {/* Other projects */}
-          {others.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+        <div
+          className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+          style={{ alignItems: "stretch" }}
+        >
+          {projects.map((p) => (
+            <ProjectCard key={p.index} p={p} labels={t.linkLabels} />
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
