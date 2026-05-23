@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { buildAutoDetectScript } from "@/lib/i18n/auto-detect";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { assetPath } from "@/lib/config";
 import "./globals.css";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://sergiorobayo.com";
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const HALFTONE_CSS_URL = `url("${assetPath("/sergio-halftone.png")}")`;
 
 const tEn = getDictionary("en");
 
@@ -86,7 +88,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      style={{ ["--halftone-url" as string]: HALFTONE_CSS_URL }}
+    >
       <head>
         {/* Locale auto-detect — runs before hydration to avoid flash */}
         <script

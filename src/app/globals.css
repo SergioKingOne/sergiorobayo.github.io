@@ -224,11 +224,13 @@ h4 { font-variation-settings: "opsz" 28, "SOFT" 50; }
   transform: scale(1.02);
 }
 
-/* Halftone portrait — mask-image trick so the PNG colors with our amber. */
+/* Halftone portrait — mask-image trick so the PNG colors with our amber.
+   --halftone-url is set on <html> in layout.tsx so it picks up the GH-Pages
+   basePath at build time. */
 .halftone-portrait {
   background: var(--color-signal);
-  -webkit-mask-image: url("/sergio-halftone.png");
-  mask-image: url("/sergio-halftone.png");
+  -webkit-mask-image: var(--halftone-url);
+  mask-image: var(--halftone-url);
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
