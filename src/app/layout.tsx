@@ -8,6 +8,8 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://sergiorobayo.com";
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const HALFTONE_CSS_URL = `url("${assetPath("/sergio-halftone.png")}")`;
+// Full URLs so metadataBase resolution doesn't strip the basePath on GH Pages.
+const OG_IMAGE_URL = `${SITE_URL}/og-preview.jpg`;
 
 const tEn = getDictionary("en");
 
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
   title: tEn.meta.title,
   description: tEn.meta.description,
   alternates: {
-    canonical: "/",
+    canonical: SITE_URL,
     languages: {
       en: SITE_URL,
       es: `${SITE_URL}/es`,
@@ -39,14 +41,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     alternateLocale: ["es_ES"],
     images: [
-      { url: "/sergio.jpg", width: 896, height: 1195, alt: "Sergio Robayo" },
+      { url: OG_IMAGE_URL, width: 1200, height: 656, alt: "Sergio Robayo — Backend Engineer" },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: tEn.meta.title,
     description: tEn.meta.twitterDescription,
-    images: ["/sergio.jpg"],
+    images: [OG_IMAGE_URL],
   },
   robots: { index: true, follow: true },
 };
